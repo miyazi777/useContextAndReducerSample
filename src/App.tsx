@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext } from 'react';
+
+type StateType = {
+  count: number
+}
+
+const TestContext = React.createContext({} as StateType);
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h1>use reducer & use context sample</h1>
+      <TestContext.Provider value={ { count: 3 } }>
+        <Test/>
+      </TestContext.Provider>
+    </>
   );
 }
 
 export default App;
+
+const Test = () => {
+  const testContext = useContext(TestContext);
+
+  return (
+    <>
+      <h2>Test component</h2>
+      <div>count: { testContext.count }</div>
+    </>
+  )
+}
